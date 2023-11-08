@@ -1,17 +1,10 @@
-# Typescript template for Bitburner's Remote File API
+# Bitburner Scripts
+This is a collection of scripts I tinker with in the game [Bitburner](https://store.steampowered.com/app/1812820/Bitburner/).
+Bitburner is an incremintal game about hacking computers. Using javascript/typescript you can fully automate the game and solve
+its puzzles to progress and level up.
 
-The official template for synchronizing Typescript/Javascript from your computer to the game.
-
-[Step by step install](BeginnersGuide.md)
-
-[Docker install guide](DockerGuide.md) (optional) 
-
-[Learn more about Typescript](https://www.typescriptlang.org/docs/)
-
-## About
-
-This template uses the Typescript compiler and the Remote File API system to synchronize Typescript to your game.
-Due to the usage of the RFA system, it works with Web and Electron (Steam) versions of the game.
+> [!WARNING]
+> Some scripts may contain spoilers (such as the UI and how I interact with the Document element). Also some scripts may be broken.
 
 ## Prerequisites
 
@@ -21,17 +14,7 @@ Due to the usage of the RFA system, it works with Web and Electron (Steam) versi
 
 Alternatively see [Docker install guide](DockerGuide.md) (optional) that installs nodejs and the Remote File API in an isolated container.
 
-## Quick start
-
-Download the template to your computer and install everything it requires:
-```
-git clone https://github.com/bitburner-official/typescript-template
-cd typescript-template
-npm i
-```
-
-### How to use this template
-
+### How to use this repo
 Write all your typescript source code in the `/src` directory
 
 To autocompile and send changed files as you save, run `npm run watch` in a terminal.
