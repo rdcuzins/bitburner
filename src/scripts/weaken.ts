@@ -1,19 +1,13 @@
 import { NS } from "@ns";
 
 export async function main(ns: NS): Promise<void> {
-  const port = ns.getPortHandle(1)
   const msg = ns.getPortHandle(2)
+  const { target, delay } = JSON.parse(ns.args[0].toString())
 
-  while(true){
-    await port.nextWrite()
-    const pData = port.peek().toString()
-    const {target, hTime} = JSON.parse(pData)
-
-    const start = Date.now()
-    msg.write(`Starting WEAKEN w/ delay of ${hTime + 500}`)
-    await ns.weaken(target.id, {additionalMsec: hTime + 500})
-      .then(() => msg.write(
-        `Weaken finished: ${Date.now() - start}`
-      ))
-  }
+  const start = Date.now()
+  msg.write(`${start}: Starting WEAKEN w/ delay of ${delay}`)
+  await ns.weaken(target, {additionalMsec: delay})
+    .then(() => msg.write(
+      `Weaken finished: ${Date.now() - start}`
+    ))
 }

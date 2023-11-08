@@ -6,8 +6,9 @@ export async function main(ns: NS): Promise<void> {
   const msg = ns.getPortHandle(2)
 
   while(true){
-    await msg.nextWrite()
+    if(port.empty()) await port.nextWrite()
     const job: Job = JSON.parse(port.read().toString())
-    const pid = ns.run(`${job.type}`)
+    const opts = JSON.stringify({target: job.target, delay: job.delay})
+    const pid = ns.run(`/scripts/${job.type}.js`, 1, opts)
   }
 }

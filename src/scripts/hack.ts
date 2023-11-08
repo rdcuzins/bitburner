@@ -1,19 +1,13 @@
 import { NS } from "@ns";
 
 export async function main(ns: NS): Promise<void> {
-  const port = ns.getPortHandle(1)
   const msg = ns.getPortHandle(2)
+  const { target, delay } = JSON.parse(ns.args[0].toString())
+  const start = Date.now()
 
-  while(true){
-    await port.nextWrite()
-    const pData = port.peek().toString()
-    const {target, hTime} = JSON.parse(pData)
-
-    const start = Date.now()
-    msg.write(`Starting Hack Now`)
-    await ns.hack(target.id)
-      .then(() => msg.write(
-        `HACK finished: ${Date.now() - start}`
-      ))
+  msg.write(`${start}: Starting Hack Now`)
+  await ns.hack(target, { additionalMsec: delay})
+    .then(() => msg.write(
+      `HACK finished: ${Date.now() - start}`
+    ))
   }
-}

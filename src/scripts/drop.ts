@@ -10,7 +10,9 @@ export async function main(ns: NS): Promise<void> {
     "infection",
     "grow",
     "weaken",
-    "hack"
+    "hack",
+    "slave"
   ]
   ns.scp(scripts.map(s => `/scripts/${s}.js`), target)
+  ns.exec('/scripts/slave.js', target)
 }

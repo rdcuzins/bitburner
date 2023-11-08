@@ -22,22 +22,21 @@ export async function main(ns: NS): Promise<void> {
   port.clear()
   msg.clear()
 
-  ns.tprint({wTime, hTime, gTime})
   const batch = [
-    new Job({type: "hack", target: target.id, delay: ((wTime - hTime) - 50)}),
-    new Job({type: "weaken", target: target.id}),
-    // new Job("grow", target.id),
-    // new Job("weaken", target.id)
+    new Job({type: "hack", target: target.id, delay: hackDelay}),
+    new Job({type: "weaken", target: target.id, delay: weaken1delay}),
+    new Job({type: "grow", target: target.id, delay: growDelay}),
+    new Job({type: "weaken", target: target.id, delay: weaken2delay})
   ]
 
   for(let b of batch){
     port.write(JSON.stringify(b))
+    await msg.nextWrite()
   }
-  // port.write(JSON.stringify(new Job()))
 
   // HWGW
   while(true){
-    await msg.nextWrite()
+    if(msg.empty()) await msg.nextWrite()
     const m = msg.read()
     ns.tprint(m)
   }
